@@ -75,7 +75,12 @@ public class Wallet {
 	
 	public void setSK(PrivateKey sKey) {
 		this.sKey = sKey;
+	}
 	
+	public void generateKeyPair() {
+		KeyPair pair = GenSig.generateKeyPair();
+		this.setSK(pair.getPrivate());
+		this.setAdress(pair.getPublic());
 	}
 }
 
