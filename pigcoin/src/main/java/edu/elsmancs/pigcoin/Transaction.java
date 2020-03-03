@@ -46,5 +46,15 @@ public class Transaction {
 	private PublicKey pKey_recipient = null;
 	private double pigcoins = 0;
 	private String message = null;
+	
+	@Override
+	public String toString() {
+		return "\n" + "hash = " + getHash() + "\n"
+				+ "prev_hash = " + getPrev_hash() + "\n"
+				+ "pkey_sender = " + getpKey_sender().hashcode() + "\n"
+				+ "pkey_recipient = " + getpKey_recipient().hashCode() + "\n"
+				+ "pigcoins = " + getPigcoins() + "\n"
+				+ "message = " + getMessage() + "\n";
+	}
 
 }
