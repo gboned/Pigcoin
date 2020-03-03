@@ -14,5 +14,8 @@ public class Wallet {
 	int inputTransactions = 0;
 	int outputTransactions = 0;
 
+	public KeyPair generateKeyPair() {
+		return GenSig.generateKeyPair();
+	}
 }
 
