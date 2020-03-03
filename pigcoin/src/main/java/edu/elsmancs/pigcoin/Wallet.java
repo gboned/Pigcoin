@@ -2,6 +2,7 @@ package edu.elsmancs.pigcoin;
 import java.security.KeyPair;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.elsmancs.pigcoin.GenSig;
@@ -13,8 +14,8 @@ public class Wallet {
 	private double total_input = 0;
 	private double total_output = 0;
 	private double balance = 0;
-	private List<Transaction> inputTransactions = 0;
-	private List<Transaction> outputTransactions = 0;
+	private List<Transaction> inputTransactions = new ArrayList();
+	private List<Transaction> outputTransactions = new ArrayList();
 
 
 	public PublicKey getAdress() {
