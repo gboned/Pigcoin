@@ -17,7 +17,8 @@ public class Wallet {
 	private List<Transaction> inputTransactions = new ArrayList();
 	private List<Transaction> outputTransactions = new ArrayList();
 
-
+	public Wallet() {}
+	
 	public PublicKey getAdress() {
 		return adress;
 	}
