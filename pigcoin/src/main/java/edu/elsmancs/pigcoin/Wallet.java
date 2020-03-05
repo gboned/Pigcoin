@@ -9,7 +9,7 @@ import edu.elsmancs.pigcoin.GenSig;
 
 public class Wallet {
 	
-	private PublicKey adress = null;
+	private PublicKey address = null;
 	private PrivateKey sKey = null;
 	private double total_input = 0;
 	private double total_output = 0;
@@ -19,12 +19,12 @@ public class Wallet {
 
 	public Wallet() {}
 	
-	public PublicKey getAdress() {
-		return adress;
+	public PublicKey getAddress() {
+		return address;
 	}
 
-	public void setAdress(PublicKey adress) {
-		this.adress = adress;
+	public void setAddress(PublicKey address) {
+		this.address = address;
 	}
 
 	public PrivateKey getsKey() {
@@ -82,7 +82,7 @@ public class Wallet {
 	public void generateKeyPair() {
 		KeyPair pair = GenSig.generateKeyPair();
 		this.setSK(pair.getPrivate());
-		this.setAdress(pair.getPublic());
+		this.setAddress(pair.getPublic());
 	}
 }
 
