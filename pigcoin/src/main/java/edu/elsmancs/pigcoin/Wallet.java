@@ -14,8 +14,8 @@ public class Wallet {
 	private double total_input = 0;
 	private double total_output = 0;
 	private double balance = 0;
-	private List<Transaction> inputTransactions = new ArrayList();
-	private List<Transaction> outputTransactions = new ArrayList();
+	private List<Transaction> inputTransactions = null;
+	private List<Transaction> outputTransactions = null;
 
 	public Wallet() {}
 	
