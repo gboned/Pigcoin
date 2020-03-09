@@ -2,7 +2,6 @@ package edu.elsmancs.pigcoin;
 import java.security.KeyPair;
 import java.security.PrivateKey;
 import java.security.PublicKey;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -171,6 +170,14 @@ public class Wallet {
 		}
 		
 		this.loadCoins(bChain);
+	}
+	
+	@Override
+	public String toString() {
+		return "\n" + "Wallet = " + getAddress().hashCode() + "\n" +
+				"Total input = " + getTotal_input() + "\n" +
+				"Total output = " + getTotal_output() + "\n" +
+				"Balance = " + getBalance() + "\n";
 	}
 }
 
