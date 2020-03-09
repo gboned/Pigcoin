@@ -3,7 +3,11 @@ import java.security.KeyPair;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import edu.elsmancs.pigcoin.GenSig;
 
@@ -103,6 +107,70 @@ public class Wallet {
 	
 	public void loadOutputTransactions(BlockChain bChain) {
 		setOutputTransactions(bChain.loadOutputTransactions(getAddress()));
+	}
+	
+	public Map<String, Double> collectCoins(double pigcoins){
+		
+		Map<String, Double> collectedCoins = new LinkedHashMap<>();
+		
+		if (getInputTransactions() == null) {
+			return null;
+		}
+		
+		if (pigcoins > getBalance()) {
+			return null;
+		}
+		
+		Double achievedCoins = 0d;
+		
+		Set<String> consumedCoins = new HashSet<>();
+		if (getOutputTransactions() != null) {
+			for (Transaction transaction : getOutputTransactions()) {
+				consumedCoins.add(transaction.getPrev_hash());
+			}
+		}
+		
+		for (Transaction transaction : getInputTransactions()) {
+			
+			if (consumedCoins.contains(transaction.getHash())) {
+				continue;
+			}
+			
+			if (transaction.getPigcoins() == pigcoins) {
+				collectedCoins.put(transaction.getHash(), transaction.getPigcoins());
+				consumedCoins.add(transaction.getHash());
+				break;
+			} else if (transaction.getPigcoins() > pigcoins) {
+				collectedCoins.put(transaction.getHash(), pigcoins);
+				collectedCoins.put("CA:" + transaction.getHash(), transaction.getPigcoins() - pigcoins);
+				consumedCoins.add(transaction.getHash());
+				break;
+			} else {
+				collectedCoins.put(transaction.getHash(), transaction.getPigcoins());
+				achievedCoins = transaction.getPigcoins();
+				pigcoins = pigcoins - achievedCoins;
+				consumedCoins.add(transaction.getHash());
+			}
+		}
+		
+		return collectedCoins;
+	}
+	
+	public byte[] signTransaction(String message) {
+		return GenSig.sign(getsKey(), message);
+	}
+	
+	public void sendCoins(PublicKey pKey_recipient, Double coins, String message, BlockChain bChain) {
+		
+		Map<String, Double> consumedCoins = new LinkedHashMap<>();
+		
+		consumedCoins = collectCoins(coins);
+		
+		if (consumedCoins != null) {
+			bChain.processTransactions(getAddress(), pKey_recipient, consumedCoins, message, signTransaction(message));
+		}
+		
+		this.loadCoins(bChain);
 	}
 }
 
