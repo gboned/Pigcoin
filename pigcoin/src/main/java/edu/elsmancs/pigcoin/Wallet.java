@@ -96,5 +96,13 @@ public class Wallet {
 		setTotal_output(pigcoins[1]);
 		updateBalance();
 	}
+	
+	public void loadInputTransactions(BlockChain bChain) {
+		setInputTransactions(bChain.loadInputTransactions(getAddress()));
+	}
+	
+	public void loadOutputTransactions(BlockChain bChain) {
+		setOutputTransactions(bChain.loadOutputTransactions(getAddress()));
+	}
 }
 
