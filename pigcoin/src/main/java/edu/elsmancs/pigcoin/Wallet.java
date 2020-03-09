@@ -84,5 +84,9 @@ public class Wallet {
 		this.setSK(pair.getPrivate());
 		this.setAddress(pair.getPublic());
 	}
+	
+	public void updateBalance() {
+		this.balance = this.getTotal_input() - this.getTotal_output();
+	}
 }
 
