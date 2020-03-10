@@ -10,6 +10,7 @@ public class Transaction {
 	private PublicKey pKey_recipient = null;
 	private double pigcoins = 0;
 	private String message = null;
+	private byte[] signature = null;
 	
 	public Transaction() {	
 		
@@ -60,7 +61,12 @@ public class Transaction {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
+	public byte[] getSignature() {
+		return this.signature;
+	}
+	public void setSignature(byte[] signature) {
+		this.signature = signature;
+	}
 	
 	@Override
 	public String toString() {
