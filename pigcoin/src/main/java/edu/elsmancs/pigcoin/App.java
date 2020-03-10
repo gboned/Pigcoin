@@ -62,7 +62,7 @@ public class App {
          */
 
         System.out.println("\n" + "Ver BlockChain" + "\n" + 
-                                  "=============="        );
+                                 "=============="        );
         
         // Crea primero la direccion "origen" del sistema que genera los pigcoins
         Wallet origin = new Wallet();
@@ -78,7 +78,7 @@ public class App {
         
         // Visualiza el blockchain                
         bChain.summarize();
-        
+  
         /**
          * Ve la transaccion de una posicion determinada del blockchain
          */
@@ -215,7 +215,7 @@ public class App {
         String message = "he roto la hucha :(";
         byte[] signedTransaction = wallet_1.signTransaction(message); // usa GenSig.sign()
         wallet_1.sendCoins(wallet_2.getAddress(), pigcoins, message, bChain); // usa wallet.collectCoins() y bChain.processTransactions()
-        
+      
         /**
          *  wallet.sendCoins() invoca a 
          *  bChain.processTransactions(wallet_1.getAddress(), wallet_2.getAddress(), consumedCoins, message, signedTransaction);
